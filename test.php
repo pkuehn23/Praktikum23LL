@@ -1,46 +1,36 @@
+<?php
+$message = null;
+if(array_key_exists("error", $_GET)){
+   $error =(int) htmlspecialchars($_GET["error"]);
+   
+   
+   switch ($error) {
+      case 401:
+         $message = "Feld darf nicht leer sein!";
+         break; 
+   } 
+}
+
+?>
 <html>
-<!Doctype html>
 <head>
-<title>Hallo Welt!</title>
+<title>website</title>
+<link rel="stylesheet" href="style.css">
 </head>
-<style>
-    b{
-        font-family: Helvetica;
-    }
-    input[type="search"]{
-        position: relative;
-        top: 50px;
-        left: 40px;
-    }
-.Label{
-    position: relative;
-    left: 40px;
-    top: 30px;
-}
-.Button{
-    position: relative;
-    left: 90px;
-    top: 65px;
-}
-
-    
-</style>
 <body>
-
-
-
-<b>
- <form action="Name.php" method="POST">
-    <div class="Label">
- <label for="Name" class="Schriftart"  >Bitte gib deinen Namen ein!</label>
+<h1>Namenspeicher</h1>
+<form action="name.php" method="POST">
+<div class="Label">
+ <label for="Test" class="Schriftart<?=($message)?' haserror':''?>"  >Bitte gib deinen Namen ein!</label>
     </div>
- <input type="search" name="Inhalt">
+ <input class="<?=($message)?' haserror':''?>" type="search" name="Inhalt">
 <div class="Button">
- <button name="Test" type="submit" >Absenden</button>
+<button name="Test" type="submit" >Absenden</button>
 </div>
 </form>
-</b>
-
-
+<a> Dein Name wird zur Identifizierung genutzt. </a>
+<?php if($message):?>
+   <script>alert("<?=$message?>");</script>
+   <?php endif; ?>
 </body>
 </html>
